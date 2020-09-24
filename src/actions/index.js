@@ -1,6 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 import { getLetterMatchCount } from '../helpers';
+
+import { secretWordArray } from '../helpers/data';
 
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
@@ -32,11 +34,20 @@ export const guessWord = (guessedWord) => {
 
 export const getSecretWord = () => {
   return (dispatch) => {
-    return axios.get('http://localhost:3030').then((response) => {
-      dispatch({
-        type: actionTypes.SET_SECRET_WORD,
-        payload: response.data,
-      });
+    // Commented out because API is currently inactive. Using an array of words instead
+    // return axios.get('http://localhost:3030').then((response) => {
+    //   dispatch({
+    //     type: actionTypes.SET_SECRET_WORD,
+    //     payload: response.data,
+    //   });
+    // });
+
+    const randomWord =
+      secretWordArray[Math.floor(Math.random() * secretWordArray.length)];
+
+    dispatch({
+      type: actionTypes.SET_SECRET_WORD,
+      payload: randomWord,
     });
   };
 };
