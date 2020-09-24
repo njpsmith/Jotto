@@ -6,6 +6,10 @@ export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
   GUESS_WORD: 'GUESS_WORD',
   SET_SECRET_WORD: 'SET_SECRET_WORD',
+  RESET_GAME: 'RESET_GAME',
+  GIVE_UP: 'GIVE_UP',
+  CUSTOM_WORD_FORM_ACTIVE_STATUS: 'CUSTOM_WORD_FORM_ACTIVE_STATUS',
+  UPDATE_GUESSED_WORD: 'UPDATE_GUESSED_WORD',
 };
 
 export const guessWord = (guessedWord) => {
@@ -35,4 +39,27 @@ export const getSecretWord = () => {
       });
     });
   };
+};
+
+export const resetGame = () => {
+  return (dispatch) => {
+    dispatch(getSecretWord());
+    dispatch({ type: actionTypes.RESET_GAME });
+  };
+};
+
+export const giveUp = () => {
+  return { type: actionTypes.GIVE_UP };
+};
+
+export const customWordFormActiveStatus = () => {
+  return { type: actionTypes.CUSTOM_WORD_FORM_ACTIVE_STATUS };
+};
+
+export const customWordFormInactiveStatus = () => {
+  return { type: actionTypes.CUSTOM_WORD_FORM_INACTIVE_STATUS };
+};
+
+export const updateGuessedWord = (newWord) => {
+  return { type: actionTypes.UPDATE_GUESSED_WORD, payload: newWord };
 };

@@ -10,6 +10,7 @@ const setup = (initialState = {}) => {
   const wrapper = shallow(<Input store={store} />)
     .dive()
     .dive();
+
   return wrapper;
 };
 
@@ -77,21 +78,38 @@ describe('redux props', () => {
 });
 
 describe('`guessWord` action creator call', () => {
-  test('`guessWord` runs when submit button is clicked', () => {
+  let guessWordMock;
+  let wrapper;
+  const guessedWord = 'train';
+  beforeEach(() => {
     // pass the Mock as a prop guessWord
-    const guessWordMock = jest.fn();
+    guessWordMock = jest.fn();
+    const props = {
+      guessWord: guessWordMock,
+    };
 
     // create a shallow wrapper of the unconnected component and pass that mocked function as a prop
-    const wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
+    wrapper = shallow(<UnconnectedInput {...props} />);
+
+    // add value to input box
+    wrapper.setState({ currentGuess: guessedWord });
 
     // simulate a click on the submit button, using findByTestAttr and Enzyme simulate()
     const submitButton = findByTestAttr(wrapper, 'submit-button');
-    submitButton.simulate('click');
+    submitButton.simulate('click', { preventDefault() {} });
+  });
 
+  test('`guessWord` was called once', () => {
     const guessWordMockCallCount = guessWordMock.mock.calls.length;
-
     expect(guessWordMockCallCount).toBe(1);
   });
 
-  test('`guessWord` gets correct argument from input field', () => {});
+  test('calls `guessWord` with correct input field value', () => {
+    const guessWordArgumment = guessWordMock.mock.calls[0][0];
+    expect(guessWordArgumment).toBe(guessedWord);
+  });
+
+  test('input box clears on submit', () => {
+    expect(wrapper.state('currentGuess')).toBe('');
+  });
 });

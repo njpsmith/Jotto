@@ -63,4 +63,29 @@ describe('if there are words guessed', () => {
     const guessedWordsNodes = findByTestAttr(wrapper, 'guessed-word');
     expect(guessedWordsNodes.length).toBe(guessedWords.length);
   });
+
+  describe('total guesses counter', () => {
+    let totalGuessCounterMessage;
+    beforeEach(() => {
+      totalGuessCounterMessage = findByTestAttr(wrapper, 'total-guess-counter');
+    });
+
+    test('message displays', () => {
+      expect(totalGuessCounterMessage.length).toBe(1);
+    });
+
+    test('displays 3 counts after three guesses', () => {
+      // testing behaviour, not implementation
+      expect(totalGuessCounterMessage.text()).toContain('3');
+    });
+  });
+
+  test('number of guesses columns matches number of guesses', () => {
+    // guessedWords.length
+    const guessedWordsGuessesColumn = findByTestAttr(
+      wrapper,
+      'guessed-word-guesses-column'
+    );
+    expect(guessedWordsGuessesColumn.length).toBe(guessedWords.length);
+  });
 });

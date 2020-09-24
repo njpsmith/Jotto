@@ -1,11 +1,34 @@
 import { storeFactory } from '../test/testUtils';
-import { guessWord } from './actions';
+import { guessWord, giveUp } from './actions';
 
 // Unit testing, because we're testing the reducer and the action creator
+describe('giveUp action dispatcher', () => {
+  const gaveUp = false;
+
+  let store;
+  const initialState = { gaveUp };
+  beforeEach(() => {
+    store = storeFactory(initialState);
+  });
+
+  test('user gave up', () => {
+    store.dispatch(giveUp());
+    const newState = store.getState();
+    const expectedState = {
+      ...initialState,
+      customWordFormStatus: 'inactive',
+      gaveUp: true,
+      guessedWords: [],
+      secretWord: null,
+      success: false,
+    };
+    expect(newState).toEqual(expectedState);
+  });
+});
+
 describe('guessWord action dispatcher', () => {
   const secretWord = 'party';
   const unsuccessfulGuess = 'train';
-  const successfulGuess = secretWord;
 
   describe('no guessed words', () => {
     let store;
@@ -19,6 +42,8 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        customWordFormStatus: 'inactive',
+        gaveUp: false,
         success: false,
         guessedWords: [{ guessedWord: unsuccessfulGuess, letterMatchCount: 3 }],
       };
@@ -30,6 +55,8 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        customWordFormStatus: 'inactive',
+        gaveUp: false,
         success: true,
         guessedWords: [{ guessedWord: secretWord, letterMatchCount: 5 }],
       };
@@ -50,6 +77,8 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        customWordFormStatus: 'inactive',
+        gaveUp: false,
         success: false,
         guessedWords: [
           ...guessedWords,
@@ -64,6 +93,8 @@ describe('guessWord action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         secretWord,
+        customWordFormStatus: 'inactive',
+        gaveUp: false,
         success: true,
         guessedWords: [
           ...guessedWords,
