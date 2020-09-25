@@ -38,6 +38,35 @@ export class UnconnectedApp extends Component {
         </div>
         <hr />
         <CustomSecretWordButton />
+
+        <hr />
+        <div>
+          This app has the following functionality:
+          <ul>
+            <li>
+              On load, the app generates a five-letter secret word, which the
+              user has to guess (ordinarily this word would be hidden from the
+              user!)
+            </li>
+            <li>
+              The user can enter their own secret word, for a second player to
+              guess
+            </li>
+            <li>
+              Unsuccessful guesses are logged in a list. The player is told how
+              many letters of their guess match the secret word
+            </li>
+            <li>
+              After two unsuccessful guesses, the player is given the option of
+              giving up. Doing so reveals the secret word and lets them generate
+              a new secret word to play again.
+            </li>
+            <li>
+              If the player guesses the correct word, they are congratulated and
+              the 'New Word' button is again displayed
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }

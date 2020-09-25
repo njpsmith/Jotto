@@ -6,6 +6,8 @@ export default (state = false, action) => {
       return true;
     case actionTypes.RESET_GAME:
       return false;
+    case actionTypes.UPDATE_GUESSED_WORD:
+      return false;
     default:
       return state;
   }
