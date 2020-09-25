@@ -46,15 +46,11 @@ export class UnconnectedApp extends Component {
             <li>
               On load, the app generates a five-letter secret word, which the
               user has to guess (ordinarily this word would be hidden from the
-              user!)
-            </li>
-            <li>
-              The user can enter their own secret word, for a second player to
-              guess
+              user, but to demonstrate the game's functionality it is visible!)
             </li>
             <li>
               Unsuccessful guesses are logged in a list. The player is told how
-              many letters of their guess match the secret word
+              many letters of their guess match the secret word.
             </li>
             <li>
               After two unsuccessful guesses, the player is given the option of
@@ -63,9 +59,39 @@ export class UnconnectedApp extends Component {
             </li>
             <li>
               If the player guesses the correct word, they are congratulated and
-              the 'New Word' button is again displayed
+              the 'New Word' button is again displayed.
+            </li>
+            <li>
+              The user can also enter their own secret word, for a second player
+              to guess.
             </li>
           </ul>
+          This app was built by{' '}
+          <a
+            href="https://www.linkedin.com/in/nicholas-smith-97a90829/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Nicholas Smith
+          </a>
+          , using Test Driven Development (TDD). It uses React.js, Redux, Jest
+          and Enzyme. Find Nicholas on LinkedIn{' '}
+          <a
+            href="https://www.linkedin.com/in/nicholas-smith-97a90829/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
+          . You can find the app's source files{' '}
+          <a
+            href="https://github.com/njpsmith/Jotto"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
+          .
         </div>
       </div>
     );
